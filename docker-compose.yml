@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   nginx:
-    image: nginx:alpine
+    image: nginx:latest
     container_name: nginx
     ports:
       - "8080:80"
@@ -14,22 +12,25 @@ services:
   node:
     build: ./node
     container_name: node
+    restart: always
     volumes:
       - ./node:/usr/src/app
       - /usr/src/app/node_modules
-    working_dir: /usr/src/app
-    command: sh -c "npm install && npx nodemon index.js"
-    ports:
-      - "3000:3000"
     depends_on:
-      - db
+      - mysql
 
-  db:
+  mysql:
     image: mysql:5.7
     container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_DATABASE: nodedb
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nodedb
     ports:
       - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
