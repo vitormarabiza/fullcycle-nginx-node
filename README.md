@@ -1,45 +1,21 @@
-# fullcycle-nginx-node
+# Full Cycle - Desafio NGINX com Node.js e MySQL
 
-Projeto de exemplo para desafio Full Cycle utilizando **NGINX como proxy reverso**, uma aplicação **Node.js** e banco de dados **MySQL**.
+Este projeto é parte do desafio Full Cycle para demonstrar a utilização do **Docker**, **NGINX**, **Node.js** e **MySQL** com **Docker Compose**.
 
----
+## 📌 Estrutura do Projeto
+- **NGINX**: Responsável pelo balanceamento de carga e proxy reverso.
+- **Node.js**: Aplicação que insere registros no banco de dados e retorna uma lista de nomes.
+- **MySQL**: Banco de dados para armazenar os dados da aplicação.
 
-## Descrição
-
-Este projeto demonstra a integração entre:
-
-- **NGINX** atuando como proxy reverso, expondo a aplicação na porta 8080.
-- **Node.js** que responde às requisições do NGINX, cadastrando nomes na tabela `people` do banco MySQL.
-- **MySQL** para armazenamento dos nomes cadastrados.
-
-Ao acessar `http://localhost:8080`, o NGINX encaminha a requisição para a aplicação Node.js, que adiciona um registro no banco e retorna uma página HTML com:
-
-- O texto `<h1>Full Cycle Rocks!</h1>`
-- A lista de nomes cadastrados no banco.
-
----
-
-## Tecnologias utilizadas
-
-- NGINX
+## 🛠 Tecnologias
+- Docker
+- Docker Compose
 - Node.js
-- Express
-- MySQL 5.7
-- Docker e Docker Compose
+- NGINX
+- MySQL
 
----
-
-## Como rodar o projeto
-
-### Pré-requisitos
-
-- Docker instalado
-- Docker Compose instalado
-
-### Passos
-
-1. Clone o repositório:
-
+## 🚀 Como rodar o projeto
+1. Clone este repositório:
    ```bash
    git clone https://github.com/vitormarabiza/fullcycle-nginx-node.git
    cd fullcycle-nginx-node
