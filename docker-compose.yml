@@ -12,10 +12,12 @@ services:
       - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "db"]
       interval: 5s
       timeout: 5s
       retries: 10
+    volumes:
+      - mysql_data:/var/lib/mysql  # Volume persistente do MySQL
 
   node:
     build: ./node
@@ -26,6 +28,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - ./node:/usr/src/app          # Código local dentro do container
+      - node_modules:/usr/src/app/node_modules  # Evita sobrescrever node_modules
 
   nginx:
     build: ./nginx
@@ -35,3 +40,7 @@ services:
       - "8080:80"
     depends_on:
       - node
+
+volumes:
+  mysql_data:
+  node_modules:
